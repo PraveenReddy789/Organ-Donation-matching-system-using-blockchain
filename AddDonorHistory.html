@@ -1,0 +1,427 @@
+<!-- {% load static %}
+<html>
+<head>
+<title>Organ Matching & Transplantation</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+
+<script LANGUAGE="Javascript" >
+function validate(){
+	var x=document.forms["f1"]["t1"].value;
+	var y=document.forms["f1"]["t2"].value;
+	var c=document.forms["f1"]["t3"].value;
+	var e=document.forms["f1"]["t4"].value;
+	var a=document.forms["f1"]["t5"].value;
+	var b=document.forms["f1"]["t6"].value;
+	var b=document.forms["f1"]["t7"].value;
+	if(x == null || x==""){
+		window.alert("Patient name must be enter");
+		document.f1.t1.focus();
+		return false;
+	}
+	if(y == null || y==""){
+		window.alert("Address must be enter");
+		document.f1.t2.focus();
+		return false;
+	}
+	if(c == null || c==""){
+		window.alert("Contact No must be enter");
+		document.f1.t3.focus();
+		return false;
+	}
+	if(isNaN(c)){
+		window.alert("Please enter valid contact number");
+		document.f1.t3.focus();
+		return false;
+	}
+	if(e == null || e==""){
+		window.alert("Donor Health Condition must be enter");
+		document.f1.t4.focus();
+		return false;
+	}
+	
+	if(a == null || a==""){
+		window.alert("Donating organ details must be enter");
+		document.f1.t5.focus();
+		return false;
+	}
+	if(b == null || b==""){
+		window.alert("Aadhar No must be enter");
+		document.f1.t6.focus();
+		return false;
+	}
+	return true;
+}
+		
+	
+	</script>
+<script>
+	// Function to open the OTP modal
+	function openOtpModal() {
+		document.getElementById("otpModal").style.display = "block";
+	}
+	
+	// Function to close the OTP modal
+	function closeOtpModal() {
+		document.getElementById("otpModal").style.display = "none";
+	}
+	
+	// Function to handle OTP verification
+	function verifyOTP() {
+		// Add your OTP verification logic here
+		// After successful verification, you can close the modal and proceed
+		closeOtpModal();
+		// Change the text of the verifyButton to "Verified"
+		document.getElementById("verifyButton").innerText = "Verified";
+		return false; // Prevent form submission
+	}
+	
+	// Event listener to open the OTP modal when Verify button is clicked
+	document.getElementById("verifyButton").addEventListener("click", openOtpModal);
+	</script>
+	
+
+
+
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div id="logo">
+			<center><font size="4" color="pink"><h1>Organ Matching & Transplantation</h1></font></center>
+		</div>
+		<div id="slogan">
+			
+		</div>
+	</div>
+	<div id="menu">
+		<ul><center>
+	  <li><a href="{% url 'AddPatientHistory' %}">Add Patient History</a></li>	
+	  <li><a href="{% url 'AddDonorHistory' %}">Add Donor History</a></li>
+	  <li><a href="{% url 'MatchOrgans' %}">Match Organs</a></li>
+	   <li><a href="{% url 'ViewTransplant' %}">View Transplantation</a></li>
+	  <li><a href="{% url 'index' %}">Logout</a></li>		
+		</center></ul>
+<br class="clearfix" />
+				</div>
+			
+	<div id="splash">
+		<img class="pic" src="{% static 'images/investor.jpg' %}" width="870" height="230" alt="" />
+	</div>	
+			<center>
+<form name="f1" method="post" action={% url 'AddDonorHistoryAction' %} enctype="multipart/form-data" OnSubmit="return validate()">
+	{% csrf_token %}<br/>
+   <h3><b>Add Donor Organ Screen</b></h3>
+   
+	<font size="" color="black"><center>{{ data|safe }}</center></font>
+						
+						<table align="center" width="80" >
+			 <tr><td><font size="" color="black">Donor&nbsp;Name</b></td><td><input type="text" name="t1" style="font-family: Comic Sans MS" size="30"/></td></tr>
+         
+		  
+		<tr><td><font size="" color="black">Address</b></td><td><input type="text" name="t2" style="font-family: Comic Sans MS" size="60"/></td></tr><br>
+
+		
+		<tr><td><font size="" color="black">Contact&nbsp;No</b></td><td><input type="text" name="t3" style="font-family: Comic Sans MS" size="20"/></td></tr>
+		<button>verify</button>
+		
+		<form id="verifyForm">
+			<tr>
+				<td><font size="" color="black">Contact No</font></td>
+				<td>
+					<input type="text" name="t3" id="contact" style="font-family: Comic Sans MS" size="20"/>
+					<button type="button" id="verifyButton">Verify</button>
+				</td>
+			</tr>
+		</form>
+		
+			<tr>
+				<td><font size="" color="black">Blood Group</font></td>
+				<td>
+					<select name="t7" style="font-family: Comic Sans MS;">
+						<option value="A+">A+</option>
+						<option value="A-">A-</option>
+						<option value="B+">B+</option>
+						<option value="B-">B-</option>
+						<option value="AB+">AB+</option>
+						<option value="AB-">AB-</option>
+						<option value="O+">O+</option>
+						<option value="O-">O-</option>
+					</select>
+				</td>
+			</tr>
+		
+		<tr><td><font size="" color="black">Donor&nbsp;Health&nbsp;Condition</b></td><td><input type="text" name="t4" style="font-family: Comic Sans MS" size="60"/></td></tr>
+
+		<tr><td><font size="" color="black">Donating&nbsp;Organs</b></td><td><input type="text" name="t5" style="font-family: Comic Sans MS" size="60"/></td></tr>
+
+		<tr><td><font size="" color="black">Aadhar&nbsp;No</b></td>
+		<td><input type="text" name="t6" style="font-family: Comic Sans MS" size="20"/></td></tr>
+		</td></tr>
+		
+		         
+			<tr><td></td><td><input type="submit" value="Submit">
+			</td>
+			</table>
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+				</div>	
+					
+				</div>
+				
+	</body>
+</html> -->
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Organ Matching & Transplantation</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script>
+		// Function to validate contact number
+		const storeOtp = () =>{
+			const userOtp = checkButton();
+			localStorage.setItem("userOtp",userOtp);
+		
+		}
+		
+		var isPhoneNumberVerified = false;
+		function generateOTP() {
+      // Generate a random 6-digit number
+      	var otp = Math.floor(100000 + Math.random() * 900000);
+      	return otp;
+    }
+		function checkButton (e){
+			var phoneNumber = document.getElementById("contact").value;
+			const otp = generateOTP();
+			var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": `https://www.fast2sms.com/dev/bulkV2?authorization=7a92c0xoi3X5LfJOVr6u1zDFkyR4wYpUKjhIqvTCWN8sZgEenHqRpHzKYnV869TJyBtawLimWCkDjEbc&variables_values=${otp}&route=otp&numbers=${phoneNumber}`,
+			"method": "GET"
+			}
+			$.ajax(settings).done(function (response) {
+			console.log(response);
+			document.getElementById("sendOtpButton").innerText="sent"
+			});
+			return otp;
+		}
+		function submitForm() {
+            if (!isPhoneNumberVerified) {
+                document.getElementById("error-message").style.display = "block";
+                return false;
+            }
+            return true;
+        }
+		function verifyPhoneNumber() {
+        isPhoneNumberVerified = true;
+        document.getElementById("error-message").style.display = "none";
+    	}
+	
+		function verifyPhoneNumber() {
+		var phoneNumber = document.forms["f1"]["t3"].value;
+		if (!phoneNumber) {
+			window.alert("Please enter a valid phone number.");
+			return;
+		}
+		// send_sms_with_otp(phoneNumber);
+		isPhoneNumberVerified = true;
+		document.getElementById("error-message").style.display = "none";
+	}
+		function verifyOTP() {
+			var otpEntered = document.getElementById("otpInput").value;
+			const generatedOTP = localStorage.getItem('userOtp')
+			console.log(otpEntered," otp value user  entered")
+			console.log(generatedOTP," otp value user  entered")
+			if (otpEntered === '') {
+				// If OTP field is empty
+				document.getElementById("otpMessage").innerText = "";
+			} else if (otpEntered === generatedOTP) {
+				localStorage.clear();
+				// If OTP verification is successful
+				document.getElementById("verifyButton").innerText = "Verified";
+				document.getElementById("otpMessage").innerText = "Your phone number has been verified successfully.";
+			} else {
+				// If OTP verification fails
+				document.getElementById("otpMessage").innerText = "\nInvalid OTP Please try again.";
+			}
+			return false; // Prevent form submission
+		}
+		function handleSubmit() {
+
+			console.log("handle submit clicked")
+			verifyOTP();
+        }
+	</script>
+
+	
+	
+	<script LANGUAGE="Javascript" >
+		
+		function validate(){
+			var x=document.forms["f1"]["t1"].value;
+			var y=document.forms["f1"]["t2"].value;
+			var c=document.forms["f1"]["t3"].value;
+			var e=document.forms["f1"]["t4"].value;
+			var a=document.forms["f1"]["t5"].value;
+			var b=document.forms["f1"]["t6"].value;
+			var f=document.forms["f1"]["t7"].value;
+			var d=document.forms["f1"]["t8"].value;
+			
+			if(x == null || x==""){
+				window.alert("Donar name must be enter");
+				document.f1.t1.focus();
+				return false;
+			}
+			if(y == null || y==""){
+				window.alert("Address must be enter");
+				document.f1.t2.focus();
+				return false;
+			}
+			if(c == null || c==""){
+				window.alert("Contact No must be enter");
+				document.f1.t3.focus();
+				return false;
+			}
+			if(isNaN(c)){
+				window.alert("Please enter valid contact number");
+				document.f1.t3.focus();
+				return false;
+			}
+			if(e == null || e==""){
+				window.alert("Disease history must be enter");
+				document.f1.t4.focus();
+				return false;
+			}			
+			if(a == null || a==""){
+				window.alert("Required organs must be enter");
+				document.f1.t5.focus();
+				return false;
+			}
+			if(b == null || b==""){
+				window.alert("Aadhar No must be enter");
+				document.f1.t6.focus();
+				return false;
+			}
+			if(d == null || d==""){
+				window.alert("verify Phone number through otp");
+				document.f1.t8.focus();
+				return false;
+			}
+			return true;
+		}
+				
+			
+			</script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <div id="logo">
+            <center><font size="4" color="pink"><h1>Organ Matching & Transplantation</h1></font></center>
+        </div>
+        <div id="slogan">
+            
+        </div>
+    </div>
+    <div id="menu">
+        <ul><center>
+            <li><a href="{% url 'AddPatientHistory' %}">Add Patient History</a></li>    
+            <li><a href="{% url 'AddDonorHistory' %}">Add Donor History</a></li>
+            <li><a href="{% url 'MatchOrgans' %}">Match Organs</a></li>
+            <li><a href="{% url 'ViewTransplant' %}">View Transplantation</a></li>
+            <li><a href="{% url 'index' %}">Logout</a></li>       
+        </center></ul>
+        <br class="clearfix" />
+    </div>
+
+    <div id="splash">
+        <img class="pic" src="{% static 'images/investor.jpg' %}" width="870" height="230" alt="" />
+    </div>
+
+    <div id="registration-form">
+		<form name="f1" method="post" action={% url 'AddDonorHistoryAction' %} enctype="multipart/form-data" onsubmit="return validate() && submitForm()">
+            {% csrf_token %}
+            <h3><b><center>Add Donor Details</center> </b></h3>
+            <font size="" color="black"><center>{{ data|safe }}</center></font>
+			<center>
+            <table align="center" width="80">
+                <tr>
+                    <td><font size="" color="black">Donor&nbsp;Name</b></td>
+                    <td><input type="text" name="t1" style="font-family: Comic Sans MS" size="30"/></td>
+                </tr>
+                <tr>
+                    <td><font size="" color="black">Address</b></td>
+                    <td><input type="text" name="t2" style="font-family: Comic Sans MS" size="60"/></td>
+                </tr>
+                <tr >
+                    <td><font size="" color="black">Contact&nbsp;No</b></td>
+                    <div style="display: flex;">
+						<td>
+							<input type="text" name="t3" id="contact" style="font-family: Comic Sans MS" size="20"/>
+							<button type="button" id="sendOtpButton" onclick="storeOtp()">send otp</button>
+							
+						</td>
+						<td>
+							<div style="display: flex;">
+							<div style="display: flex;  margin-left: -250px;">
+								<input type="text"  id="otpInput" name="t8"  size="20"/>
+							<button type="button" id="verifyButton" onclick="handleSubmit()">Verify</button>
+							</div>
+						</div>
+						</td>
+					</div>
+                </tr>
+				<tr style="text-align:center">
+					<td></td>
+					
+				<td style="text-align:center">
+					<div style="display: block; margin:auto; text-align:center">
+					<p id="otpMessage"></p>
+
+					</div>
+				</td>
+				</tr>
+
+                <tr>
+                    <td><font size="" color="black">Blood&nbsp;Group</font></td>
+                    <td>
+                        <select name="t7" style="font-family: Comic Sans MS;">
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><font size="" color="black">Donor&nbsp;Health&nbsp;Condition</b></td>
+                    <td><input type="text" name="t4" style="font-family: Comic Sans MS" size="60"/></td>
+                </tr>
+                <tr>
+                    <td><font size="" color="black">Donating&nbsp;Organs</b></td>
+                    <td><input type="text" name="t5" style="font-family: Comic Sans MS" size="60"/></td>
+                </tr>
+                <tr>
+                    <td><font size="" color="black">Aadhar&nbsp;No</b></td>
+                    <td><input type="text" name="t6" style="font-family: Comic Sans MS" size="20"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Submit" name="submit-btn"></td>
+                </tr>
+            </table>
+		</center>
+        </form>
+    </div>
+</body>
+</html>
+
